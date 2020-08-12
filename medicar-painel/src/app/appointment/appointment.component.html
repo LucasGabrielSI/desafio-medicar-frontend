@@ -1,0 +1,185 @@
+<div
+  *ngIf="msgFormSuccess == true"
+  class="alert alert-success alert-dismissible fade show"
+  role="alert"
+>
+  <strong>SUCESSO!</strong> Horário agendado.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div
+  *ngIf="msgFormDeleteSuccess == true"
+  class="alert alert-success alert-dismissible fade show"
+  role="alert"
+>
+  <strong>SUCESSO!</strong> Horário desmarcado.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="container">
+  <nav class="navbar navbar-expand-sm navbar-light bg-white">
+    <img src="../../assets/img/logo.png" class="navbar-logo" />
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto"></ul>
+      <form class="form-inline my-2 my-lg-0">
+        <p class="nav-item active">{{ userName }}</p>
+        <p>
+          <button
+            type="button"
+            class="btn btn-link form-control col-sm-6"
+            (click)="logout()"
+          >
+            Desconectar
+          </button>
+        </p>
+      </form>
+    </div>
+  </nav>
+</div>
+
+<div class="container" style="margin-top: 40px;">
+  <div class="row">
+    <div class="col-6 table-title">
+      <h5>Consulta Clínica</h5>
+    </div>
+    <div class="col-6">
+      <button
+        type="button"
+        class="btn btn-primary btn-sm btn-modal"
+        data-toggle="modal"
+        data-target="#myModal"
+      >
+        <i class="fa fa-plus btn-icon"></i>
+        Nova Consulta
+      </button>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="table-head" scope="col">Especialidade</th>
+        <th class="table-head" scope="col">Profissional</th>
+        <th class="table-head" scope="col">Data</th>
+        <th class="table-head" scope="col">Hora</th>
+        <th class="table-head" scope="col"></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let consulta of consultas; let i = index">
+      <tr *ngIf="consulta != undefined">
+        <td scope="row">{{ consulta.medico.especialidade.nome }}</td>
+        <td>{{ consulta.medico.nome }}</td>
+        <td>{{ consulta.dia | date: "dd/MM/yyyy" }}</td>
+        <th style="font-weight: normal;">{{ consulta.horario }}</th>
+        <td>
+          <button
+            class="btn btn-sm btn-link btn-desm btn-desmarcar"
+            type="button"
+            (click)="desmarcarConsulta(consulta.id)"
+          >
+            <i class="fa fa-remove btn-icon"></i>
+            Desmarcar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h4 class="modal-title">Nova Consulta</h4>
+      </div>
+      <form [formGroup]="formAgendar">
+        <div class="form-group col-md-12">
+          <select
+            id="inputEspecialidade"
+            class="form-control"
+            formControlName="especialidade"
+            (change)="getMedicos()"
+          >
+            <option value="" selected disabled>Especialidade</option>
+            <option
+              *ngFor="let especialidade of especialidades"
+              value="{{ especialidade.id }}"
+              >{{ especialidade.nome }}</option
+            >
+          </select>
+        </div>
+
+        <div class="form-group col-md-12">
+          <select
+            class="form-control"
+            formControlName="medico"
+            (change)="getData()"
+          >
+            <option value="" selected disabled>Médico</option>
+            <option
+              *ngFor="let medico of medicosSelecionados"
+              value="{{ medico.id }}"
+              >{{ medico.nome }}</option
+            >
+          </select>
+        </div>
+
+        <div class="form-group col-md-12">
+          <select
+            class="form-control"
+            formControlName="dia"
+            (change)="getHorarios()"
+          >
+            <option value="" selected disabled>Data</option>
+            <option
+              *ngFor="let diaLivre of diasLivres"
+              value="{{ diaLivre }}"
+              >{{ diaLivre | date: "dd/MM/yyyy" }}</option
+            >
+          </select>
+        </div>
+
+        <div class="form-group col-md-12">
+          <select class="form-control" formControlName="hora">
+            <option value="" selected disabled>Hora</option>
+            <option *ngFor="let hora of horariosLivres" value="{{ hora }}">{{
+              hora
+            }}</option>
+          </select>
+        </div>
+      </form>
+      <!-- Modal footer -->
+      <div
+        class="row"
+        style="    width: 100%;
+        margin-left: 0; margin-bottom: 20px;
+    margin-top: 20px;"
+      >
+        <div class="col-6">
+          <button
+            type="button"
+            class="btn btn-md btn-block btn-link btn-modal-close"
+            data-dismiss="modal"
+          >
+            Cancelar
+          </button>
+        </div>
+        <div class="col-6">
+          <button
+            type="button"
+            class="btn btn-md btn-block btn-primary"
+            data-dismiss="modal"
+            (click)="preMarcarConsulta()"
+          >
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

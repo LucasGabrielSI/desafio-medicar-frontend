@@ -1,0 +1,129 @@
+<div
+  *ngIf="msgFormSuccess == true"
+  class="alert alert-success alert-dismissible fade show"
+  role="alert"
+>
+  <strong>SUCESSO!</strong> Usuário cadastrado com sucesso.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div
+  *ngIf="msgFormErro == true"
+  class="alert alert-danger alert-dismissible fade show"
+  role="alert"
+>
+  <strong>ERRO!</strong> Desculpe falha no cadastro.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div
+  *ngIf="formValid == false"
+  class="alert alert-danger alert-dismissible fade show"
+  role="alert"
+>
+  <strong>Senhas não conferem!</strong> Por favor, verifique, e tente novamente.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="form-main">
+  <div class="form-main-container">
+    <img class="form-main-img" src="../../assets/img/logo.png" />
+    <form [formGroup]="formCredentials">
+      <div class="mb-12">
+        <span class="form-group has-float-label">
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Default"
+            placeholder=" "
+            formControlName="username"
+            aria-describedby="inputGroup-sizing-default"
+            required
+          />
+          <label>Nome</label>
+        </span>
+
+        <span class="form-group has-float-label">
+          <input
+            type="email"
+            class="form-control"
+            aria-label="Default"
+            placeholder=" "
+            formControlName="email"
+            aria-describedby="inputGroup-sizing-default"
+            required
+          />
+          <label>Email</label>
+        </span>
+
+        <span class="form-group has-float-label">
+          <input
+            [type]="hide ? 'password' : 'text'"
+            class="form-control btn-password"
+            aria-label="Default"
+            placeholder=" "
+            formControlName="password"
+            aria-describedby="inputGroup-sizing-default"
+          />
+
+          <label>Senha</label>
+          <div (click)="hide = !hide">
+            <i matSuffix class="input-pass material-icons">{{
+              hide ? "visibility" : "visibility_off"
+            }}</i>
+          </div>
+        </span>
+
+        <span class="form-group has-float-label">
+          <input
+            [type]="hideConfirm ? 'password' : 'text'"
+            class="form-control btn-password"
+            aria-label="Default"
+            placeholder=" "
+            formControlName="confirm_password"
+            aria-describedby="inputGroup-sizing-default"
+          />
+
+          <label>Confirmar Senha</label>
+          <div (click)="hideConfirm = !hideConfirm">
+            <i matSuffix class="input-pass material-icons">{{
+              hideConfirm ? "visibility" : "visibility_off"
+            }}</i>
+          </div>
+        </span>
+      </div>
+      <div class="form-group">
+        <button
+          routerLink="/login"
+          type="button"
+          class="btn btn-link form-control col-sm-6"
+        >
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary form-control col-sm-6"
+          (click)="register()"
+          [disabled]="
+            formCredentials.value.username == null ||
+            formCredentials.value.username == '' ||
+            formCredentials.value.email == null ||
+            formCredentials.value.email == '' ||
+            formCredentials.value.password == null ||
+            formCredentials.value.password == '' ||
+            formCredentials.value.confirm_password == null ||
+            formCredentials.value.confirm_password == ''
+          "
+        >
+          Confirmar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

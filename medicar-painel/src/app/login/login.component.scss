@@ -1,0 +1,39 @@
+div.form-main {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-top: 200px;
+}
+img.form-main-img {
+  width: 150px;
+  margin-bottom: 14px;
+}
+div.form-main-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 29.28%;
+  height: 50px;
+  margin-top: auto;
+}
+.form-group {
+  margin-top: 1rem;
+}
+.form-check-label {
+  color: #a8a8a8;
+}
+button.btn-link {
+  font-weight: 600;
+}
+.btn-pass-icon {
+  right: 0;
+  float: right;
+  margin-top: -30px;
+}
+.input-pass {
+  right: 0;
+  float: right;
+  margin-top: -31px;
+  margin-right: 6px;
+  color: #a8a8a8;
+  cursor: pointer;
+}

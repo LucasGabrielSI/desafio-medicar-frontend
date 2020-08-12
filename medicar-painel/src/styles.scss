@@ -1,0 +1,81 @@
+/* You can add global styles to this file, and also import other style files */
+/* import the necessary Bootstrap files */
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "~material-design-icons/iconfont/material-icons.css";
+
+$theme-colors: (
+  primary: #49b4bb
+);
+
+/* finally, import Bootstrap */
+@import "node_modules/bootstrap/scss/bootstrap";
+.has-float-label .form-control:placeholder-shown:not(:focus) + * {
+  font-size: 100%;
+  opacity: 0.5;
+  top: 0.6em;
+  font-weight: 400;
+  color: #a8a8a8;
+}
+.has-float-label label,
+.has-float-label > span {
+  left: 6px;
+  background: #ffffff;
+  color: #a8a8a8;
+}
+.btn-link {
+  color: #49b4bb;
+}
+.btn-link:hover {
+  color: #49b4bb;
+}
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  border: 1px solid #a8a8a8;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  border-color: #49b4bb;
+  box-shadow: none;
+  outline: 0 none;
+}
+.input-group-append .btn {
+  border-left: none;
+  box-shadow: none;
+  outline: 0 none;
+}
+
+.input-group > .form-control:not(:last-child),
+.input-group > .custom-select:not(:last-child) {
+  border-right: none;
+}
